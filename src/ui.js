@@ -1,4 +1,5 @@
 import { moonSVG, sunSVG, sysSVG } from "./icons";
+import { cls } from "./utils";
 
 const taskTitle = document.getElementById("task-title");
 const taskDescription = document.getElementById("task-description");
@@ -26,19 +27,35 @@ const taskModal = document.getElementById("add-task-modal");
 const overlay = document.getElementById("overlay");
 const btnAddTask = document.getElementById("add-task-button");
 const btnCloseTask = document.getElementById("close-task-button");
+const dueDate = document.getElementById("due-date");
 
-const openModal = function (e) {
-  e.preventDefault();
+const openModal = function () {
+  // e.preventDefault();
   taskModal.classList.remove("invisible", "opacity-0");
   overlay.classList.remove("invisible", "opacity-0");
 };
 
-const closeModal = function (e) {
+const closeModal = function () {
   taskModal.classList.add("invisible", "opacity-0");
   overlay.classList.add("invisible", "opacity-0");
   taskTitle.innerHTML = "";
   taskDescription.innerHTML = "";
+  dueDate.value = "";
 };
+
+// Open modal with "a", close modal with "Esc"
+document.addEventListener("keydown", function (e) {
+  if (!(e.key === "a" || e.key === "Escape")) return;
+
+  switch (e.key) {
+    case "a":
+      openModal();
+      break;
+    case "Escape":
+      closeModal();
+      break;
+  }
+});
 
 taskModal.addEventListener("transitionend", function (e) {
   if (e.propertyName !== "visibility") return;
@@ -160,4 +177,51 @@ document.addEventListener("click", function (e) {
   )
     return;
   hideThemeSelectionMenu();
+});
+
+// save task button
+
+const saveButton = document.getElementById("save-task-button");
+const prioritySelector = document.getElementById("priority-selector");
+const priorities = document.querySelectorAll("[data-priority]");
+
+const deselectPriorities = function () {
+  priorities.forEach((e) => e.removeAttribute("data-selected"));
+};
+
+const getSelectedPriority = function () {
+  return Array.from(priorities)
+    .filter((e) => e.hasAttribute("data-selected"))
+    .pop();
+};
+
+const highlightPriority = function () {
+  const classesToAdd = "bg-slate-300 text-slate-800";
+  priorities.forEach((e) => e.classList.remove(...cls(classesToAdd)));
+
+  const selected = getSelectedPriority();
+  selected.classList.add(...cls(classesToAdd));
+};
+
+const setPriority = function (e) {
+  if (!e.target.dataset.priority) return;
+  deselectPriorities();
+  e.target.setAttribute("data-selected", "");
+  highlightPriority();
+};
+
+prioritySelector.addEventListener("click", setPriority);
+
+const getTaskDetails = function () {
+  return {
+    title: taskTitle.textContent,
+    description: taskDescription.textContent,
+    due: new Date(dueDate.value),
+    priority: getSelectedPriority().dataset.priority,
+  };
+};
+
+saveButton.addEventListener("click", function () {
+  console.log(getTaskDetails());
+  closeModal();
 });

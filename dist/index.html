@@ -20,7 +20,7 @@
           class="flex gap-2 items-center ml-auto select-none cursor-pointer px-2 py-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800"
         >
           <div class="" id="theme-toggle"></div>
-          <div>theme</div>
+          <div>Theme</div>
         </div>
         <!-- theme selection menu -->
         <div
@@ -32,21 +32,21 @@
             data-theme="dark"
             class="hover:bg-gray-300 hover:dark:bg-gray-700 cursor-pointer rounded-t-md px-6 py-1"
           >
-            dark
+            Dark
           </div>
           <div
             data-active="false"
             data-theme="light"
             class="hover:bg-gray-300 hover:dark:bg-gray-700 cursor-pointer px-6 py-1"
           >
-            light
+            Light
           </div>
           <div
             data-active="true"
             data-theme="system"
             class="hover:bg-gray-300 hover:dark:bg-gray-700 cursor-pointer rounded-b-md px-6 py-1"
           >
-            system
+            System
           </div>
         </div>
       </div>
@@ -77,19 +77,25 @@
         </nav>
       </div>
       <main id="main" class="flex flex-col items-center p-5 w-4xl flex-1">
-        <button
-          id="add-task-button"
-          class="px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 hover:rounded-md cursor-pointer"
-        >
-          add task
-        </button>
+        <div class="flex gap-2 items-center">
+          <button
+            id="add-task-button"
+            class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-rose-100 rounded-md cursor-pointer"
+          >
+            add task
+          </button>
+          <kbd
+            class="cursor-default rounded-sm border border-b-4 font-bold text-slate-400 border-slate-400 dark:text-slate-600 dark:border-slate-600 leading-none text-center px-2 py-1 text-sm"
+            >A</kbd
+          >
+        </div>
       </main>
 
       <!-- Modal -->
       <!-- invisible opacity-0 -->
       <div
         id="add-task-modal"
-        class="invisible opacity-0 transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/4 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
+        class="max-w-2xl min-w-max invisible opacity-0 transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/4 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
       >
         <button
           id="close-task-button"
@@ -112,6 +118,49 @@
           contenteditable
           placeholder="Description"
         ></div>
+
+        <label for="due-date">Due Date:</label>
+        <input
+          type="date"
+          name="due-date"
+          id="due-date"
+          class="block rounded-md bg-slate-700 mb-4"
+        />
+
+        <p class="mb-2">Priority:</p>
+        <div id="priority-selector" class="flex items-center gap-1">
+          <div
+            class="cursor-pointer border leading-none px-3 py-2"
+            data-priority="1"
+          >
+            1
+          </div>
+          <div
+            class="cursor-pointer border leading-none px-3 py-2"
+            data-priority="2"
+          >
+            2
+          </div>
+          <div
+            class="cursor-pointer border leading-none px-3 py-2"
+            data-priority="3"
+          >
+            3
+          </div>
+          <div
+            class="cursor-pointer border leading-none px-3 py-2"
+            data-priority="4"
+          >
+            4
+          </div>
+        </div>
+
+        <button
+          id="save-task-button"
+          class="px-4 py-1 bg-rose-600 hover:bg-rose-700 text-rose-100 rounded-md cursor-pointer block ml-auto"
+        >
+          Save
+        </button>
       </div>
 
       <!-- Overlay -->
