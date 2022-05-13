@@ -1,5 +1,7 @@
 import { moonSVG, sunSVG, sysSVG } from "./icons";
 import { cls } from "./utils";
+import { Task } from "./task";
+import { Project } from "./project";
 
 const taskTitle = document.getElementById("task-title");
 const taskDescription = document.getElementById("task-description");
@@ -217,11 +219,37 @@ const getTaskDetails = function () {
     title: taskTitle.textContent,
     description: taskDescription.textContent,
     due: new Date(dueDate.value),
-    priority: getSelectedPriority().dataset.priority,
+    priority: getSelectedPriority()?.dataset.priority || "",
   };
 };
 
+let tasks = [];
+
 saveButton.addEventListener("click", function () {
-  console.log(getTaskDetails());
+  const temp = getTaskDetails();
+  const task = new Task(temp.title, temp.description, temp.due, temp.priority);
+  tasks.push(task);
+
   closeModal();
 });
+
+////// TESTING
+
+const project1 = new Project("project1");
+const project2 = new Project("project2");
+
+const task1 = new Task("title 1", "desc 1", "today", "1");
+const task2 = new Task("title 2", "desc 2", "today", "2");
+const task3 = new Task("title 3", "I am not here", "today", "3");
+const task4 = new Task("title 4", "desc 4", "today", "4");
+const task5 = new Task("title 5", "desc 5", "today", "5");
+
+project1.addTask(task1);
+project1.addTask(task2);
+project1.addTask(task3);
+project1.addTask(task4);
+project1.addTask(task5);
+
+const viewTasks = function (project) {
+  // TODO: write this function
+};
