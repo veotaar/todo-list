@@ -27,8 +27,8 @@ export class Project {
     this.tasks.push(task);
   }
 
-  deleteTask(task) {
-    const indexToDelete = this.tasks.findIndex((e) => e.id === task.id);
+  deleteTask(id) {
+    const indexToDelete = this.tasks.findIndex((e) => e.id === id);
     this.tasks.splice(indexToDelete, 1);
   }
 }

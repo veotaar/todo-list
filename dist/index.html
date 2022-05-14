@@ -66,36 +66,38 @@
               ;
               class="p-4 hover:bg-slate-200 dark:hover:bg-slate-800 hover:rounded-md cursor-pointer"
             >
-              dashboard
+              Inbox
             </li>
             <li
               class="p-4 hover:bg-slate-200 dark:hover:bg-slate-800 hover:rounded-md cursor-pointer"
             >
-              test
+              Today
             </li>
           </ul>
         </nav>
       </div>
-      <main id="main" class="flex flex-col items-center p-5 w-4xl flex-1">
-        <div class="flex gap-2 items-center">
+      <main id="main" class="flex flex-col p-5 mx-auto w-11/12 xl:w-2/3 gap-2">
+        <div class="flex gap-2 items-center self-end">
           <button
             id="add-task-button"
             class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-rose-100 rounded-md cursor-pointer"
           >
-            add task
+            Add a Task
           </button>
           <kbd
             class="cursor-default rounded-sm border border-b-4 font-bold text-slate-400 border-slate-400 dark:text-slate-600 dark:border-slate-600 leading-none text-center px-2 py-1 text-sm"
             >A</kbd
           >
         </div>
+
+        <ul id="tasks" class="flex flex-col gap-2"></ul>
       </main>
 
       <!-- Modal -->
       <!-- invisible opacity-0 -->
       <div
         id="add-task-modal"
-        class="max-w-2xl min-w-max invisible opacity-0 transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/4 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
+        class="w-11/12 max-w-3xl min-w-max invisible opacity-0 transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
       >
         <button
           id="close-task-button"
