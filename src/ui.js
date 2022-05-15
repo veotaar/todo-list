@@ -236,7 +236,8 @@ const task1 = new Task(
   "Make a cake",
   "with carrots and walnuts",
   new Date(),
-  "1"
+  "2",
+  false
 );
 // const task2 = new Task("title 2", "desc 2", "today", "2");
 // const task3 = new Task("title 3", "I am not here", "today", "3");
@@ -252,7 +253,13 @@ viewTasks(project1);
 
 saveButton.addEventListener("click", function () {
   const temp = getTaskDetails();
-  const task = new Task(temp.title, temp.description, temp.due, temp.priority);
+  const task = new Task(
+    temp.title,
+    temp.description,
+    temp.due,
+    temp.priority,
+    false
+  );
   project1.addTask(task);
   viewTasks(project1);
   closeModal();

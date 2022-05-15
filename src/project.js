@@ -31,4 +31,9 @@ export class Project {
     const indexToDelete = this.tasks.findIndex((e) => e.id === id);
     this.tasks.splice(indexToDelete, 1);
   }
+
+  getTask(id) {
+    const index = this.tasks.findIndex((e) => e.id === id);
+    return this.tasks.at(index);
+  }
 }
