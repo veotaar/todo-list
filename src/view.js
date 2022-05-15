@@ -32,18 +32,22 @@ export const viewTasks = function (project) {
     tasksDiv.insertAdjacentHTML(
       "beforeend",
       `
-      <li class="flex items-center gap-4" data-id="${task.id}">
+      <li class="flex items-center gap-4 border-b last:border-b-0 border-slate-700" data-id="${
+        task.id
+      }">
         <input type="checkbox" data-id="${task.id}" ${
         task.done ? "checked" : ""
       } class="h-6 w-6 cursor-pointer border-none rounded-full ring-4 focus:ring-2 focus:ring-opacity-50 ${checkboxStyles}"/>
-        <div class="flex gap-2 items-center border-b border-slate-700 w-full p-1 leading-tight">
+        <div class="flex items-center w-full p-2 leading-tight">
           <div class="flex-1">
-            <p class="font-bold tracking-wide">${task.title}</p>
-            <p class="font-normal text-slate-400 tracking-wide">${
-              task.description
-            }</p>
+            <p class="font-bold tracking-wide ${
+              task.done ? "line-through" : ""
+            } ">${task.title}</p>
+            <p class="font-normal text-slate-400 tracking-wide ${
+              task.done ? "line-through" : ""
+            }">${task.description}</p>
           </div>
-          <button><div class="p-2">${binSVG}</div></button>
+          <button><div class="p-2 text-slate-600 hover:text-slate-300">${binSVG}</div></button>
           <p class="text-sm text-slate-400">${format(
             task.dueDate,
             "MMM do"
@@ -64,4 +68,6 @@ tasksDiv.addEventListener("click", function (e) {
 
 tasksDiv.addEventListener("input", function (e) {
   project1.getTask(e.target.dataset.id).toggleDone();
+  project1.moveTaskToTheEnd(e.target.dataset.id);
+  viewTasks(project1);
 });

@@ -36,4 +36,10 @@ export class Project {
     const index = this.tasks.findIndex((e) => e.id === id);
     return this.tasks.at(index);
   }
+
+  moveTaskToTheEnd(id) {
+    const index = this.tasks.findIndex((e) => e.id === id);
+    if (this.tasks.at(index).done)
+      this.tasks.push(this.tasks.splice(index, 1).pop());
+  }
 }

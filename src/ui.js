@@ -230,25 +230,36 @@ const getTaskDetails = function () {
 ////// TESTING
 
 export const project1 = new Project("project1");
-const project2 = new Project("project2");
 
 const task1 = new Task(
   "Make a cake",
   "with carrots and walnuts",
   new Date(),
-  "2",
+  "1",
   false
 );
-// const task2 = new Task("title 2", "desc 2", "today", "2");
-// const task3 = new Task("title 3", "I am not here", "today", "3");
-// const task4 = new Task("title 4", "desc 4", "today", "4");
-// const task5 = new Task("title 5", "desc 5", "today", "5");
+const task2 = new Task(
+  "Finish todo project",
+  "finish it",
+  new Date(),
+  "1",
+  false
+);
+const task3 = new Task("Drink water", "yes please", new Date(), "2", false);
+const task4 = new Task("Go for a walk", "5 kilometers", new Date(), "3", false);
+const task5 = new Task(
+  "Practice duolingo",
+  "learn Dutch",
+  new Date(),
+  "4",
+  false
+);
 
 project1.addTask(task1);
-// project1.addTask(task2);
-// project1.addTask(task3);
-// project1.addTask(task4);
-// project1.addTask(task5);
+project1.addTask(task2);
+project1.addTask(task3);
+project1.addTask(task4);
+project1.addTask(task5);
 viewTasks(project1);
 
 saveButton.addEventListener("click", function () {
