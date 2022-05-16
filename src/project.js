@@ -5,6 +5,7 @@ export class Project {
     this.name = name;
     this.tasks = [];
     this.id = uuidv4();
+    this.isCurrent = false;
   }
 
   get tasks() {
@@ -21,6 +22,14 @@ export class Project {
 
   get name() {
     return this._name;
+  }
+
+  set isCurrent(c) {
+    this._isCurrent = c;
+  }
+
+  get isCurrent() {
+    return this._isCurrent;
   }
 
   addTask(task) {

@@ -19,7 +19,9 @@ class ProjectManager {
   }
 
   setCurrentProject(id) {
+    this.projects.forEach((project) => (project.isCurrent = false));
     this.currentProject = this.getProject(id);
+    this.currentProject.isCurrent = true;
   }
 }
 

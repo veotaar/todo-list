@@ -63,7 +63,6 @@
           <ul class="list-none">
             <li
               data-active="true"
-              ;
               class="p-4 hover:bg-slate-200 dark:hover:bg-slate-800 hover:rounded-md cursor-pointer"
             >
               Inbox
@@ -73,15 +72,21 @@
             >
               Today
             </li>
+            <li
+              class="p-4 hover:bg-slate-200 dark:hover:bg-slate-800 hover:rounded-md cursor-pointer"
+            >
+              Upcoming
+            </li>
           </ul>
 
           <div
-            class="flex items-center justify-between p-4 border-b border-slate-600"
+            class="p-4 mb-2 border-b border-slate-600 flex justify-between items-center"
           >
             <h2>Projects</h2>
             <button
               id="add-project-button"
-              class="cursor-pointer hover:bg-slate-700 active:bg-slate-600 hover:rounded-full p-1"
+              class="hover:bg-slate-700 active:bg-slate-600 hover:rounded-md p-1"
+              aria-label="create project"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -99,13 +104,14 @@
               </svg>
             </button>
           </div>
+          <ul id="projects" class="list-none flex flex-col"></ul>
         </nav>
       </div>
       <main id="main" class="flex flex-col p-5 mx-auto w-11/12 xl:w-2/3 gap-2">
         <div class="flex gap-2 items-center self-end">
           <button
             id="add-task-button"
-            class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-rose-100 rounded-md cursor-pointer"
+            class="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-md cursor-pointer"
           >
             Add a Task
           </button>
@@ -122,7 +128,7 @@
       <!-- invisible opacity-0 -->
       <div
         id="add-task-modal"
-        class="w-11/12 max-w-3xl min-w-max invisible opacity-0 transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
+        class="w-11/12 max-w-3xl min-w-max hidden transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
       >
         <button
           id="close-task-button"
@@ -190,10 +196,42 @@
         </button>
       </div>
 
+      <!-- -------------------------------------- -->
+      <!-- "ADD PROJECT" MODAL -->
+      <div
+        id="add-project-modal"
+        class="w-11/12 max-w-xl min-w-max hidden transition-all duration-200 rounded-lg p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-100 dark:bg-slate-800 z-30 shadow-md"
+      >
+        <button
+          id="close-project-button"
+          class="absolute top-1 right-2 text-2xl cursor-pointer border-none bg-none"
+        >
+          &times;
+        </button>
+
+        <h2 class="text-xl text-center mb-4">Create Project</h2>
+
+        <label for="project-title" class="block mb-2 text-lg"
+          >Project Name</label
+        >
+        <input
+          type="text"
+          id="project-title"
+          class="block dark:bg-slate-700 dark:border-slate-900 focus:ring-2 focus:ring-slate-500 rounded-md w-full mb-3 font-bold"
+        />
+        <button
+          type="submit"
+          id="save-project-button"
+          class="p-2 bg-rose-600 hover:bg-rose-700 text-rose-100 rounded-md cursor-pointer block ml-auto w-full"
+        >
+          Save
+        </button>
+      </div>
+
       <!-- Overlay -->
       <div
         id="overlay"
-        class="invisible opacity-0 transition-all duration-200 fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm z-10"
+        class="hidden transition-all duration-200 fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur-sm z-10"
       ></div>
     </div>
   </body>
