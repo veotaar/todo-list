@@ -246,19 +246,27 @@ const getSelectedPriority = function () {
     .pop();
 };
 
-const highlightPriority = function () {
-  const classesToAdd = "bg-slate-300 text-slate-800";
-  priorities.forEach((e) => e.classList.remove(...cls(classesToAdd)));
+const highlightPriority = function (priority) {
+  const classes = {
+    1: "border-rose-700 dark:border-rose-700 bg-rose-700 text-rose-50",
+    2: "border-orange-700 dark:border-orange-700 bg-orange-700 text-orange-50",
+    3: "border-blue-700 dark:border-blue-700 bg-blue-700 text-blue-50",
+    4: "border-neutral-700 dark:border-neutral-700 bg-neutral-700 text-neutral-50",
+  };
+
+  priorities.forEach((e) =>
+    e.classList.remove(...cls(classes[e.dataset.priority]))
+  );
 
   const selected = getSelectedPriority();
-  selected.classList.add(...cls(classesToAdd));
+  selected.classList.add(...cls(classes[priority]));
 };
 
 const setPriority = function (e) {
   if (!e.target.dataset.priority) return;
   deselectPriorities();
   e.target.setAttribute("data-selected", "");
-  highlightPriority();
+  highlightPriority(e.target.dataset.priority);
 };
 
 prioritySelector.addEventListener("click", setPriority);
@@ -284,6 +292,14 @@ saveProjectButton.addEventListener("click", function () {
   closeProjectModal();
   viewProjects(projectManager);
   viewTasks();
+  document
+    .getElementById("inbox")
+    .classList.remove(
+      "border-l",
+      "border-rose-600",
+      "font-bold",
+      "text-rose-600"
+    );
 });
 
 // save project when Enter is pressed
@@ -297,42 +313,15 @@ projectModal.addEventListener("keyup", function (e) {
   closeProjectModal();
   viewProjects(projectManager);
   viewTasks();
+  document
+    .getElementById("inbox")
+    .classList.remove(
+      "border-l",
+      "border-rose-600",
+      "font-bold",
+      "text-rose-600"
+    );
 });
-
-////// TESTING
-
-// export const project1 = new Project("project1");
-
-// const task1 = new Task(
-//   "Make a cake",
-//   "with carrots and walnuts",
-//   new Date(),
-//   "1",
-//   false
-// );
-// const task2 = new Task(
-//   "Finish todo project",
-//   "finish it",
-//   new Date(),
-//   "1",
-//   false
-// );
-// const task3 = new Task("Drink water", "yes please", new Date(), "2", false);
-// const task4 = new Task("Go for a walk", "5 kilometers", new Date(), "3", false);
-// const task5 = new Task(
-//   "Practice duolingo",
-//   "learn Dutch",
-//   new Date(),
-//   "4",
-//   false
-// );
-
-// project1.addTask(task1);
-// project1.addTask(task2);
-// project1.addTask(task3);
-// project1.addTask(task4);
-// project1.addTask(task5);
-// viewTasks(project1);
 
 /////////////////////////////
 ////// Saving a task

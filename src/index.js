@@ -1,6 +1,7 @@
 import "./style.css";
 import "./ui";
 import "./view";
+import "./inbox";
 
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", () => {

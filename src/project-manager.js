@@ -18,6 +18,11 @@ class ProjectManager {
     return this.projects.at(index);
   }
 
+  getProjectByName(name) {
+    const index = this.projects.findIndex((e) => e.name === name);
+    return this.projects.at(index);
+  }
+
   setCurrentProject(id) {
     this.projects.forEach((project) => (project.isCurrent = false));
     this.currentProject = this.getProject(id);

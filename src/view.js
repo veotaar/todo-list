@@ -5,9 +5,14 @@ import { projectManager } from "./project-manager";
 
 const tasksDiv = document.getElementById("tasks");
 const projectsUL = document.getElementById("projects");
+const projectName = document.getElementById("project-name");
+
+const viewProjectName = () =>
+  (projectName.innerText = projectManager.currentProject.name);
 
 export const viewTasks = function (project = projectManager.currentProject) {
   tasksDiv.innerHTML = "";
+  viewProjectName();
   project.tasks.forEach((task) => {
     // rose orange blue neutral
     let checkboxStyles;
@@ -83,12 +88,14 @@ tasksDiv.addEventListener("input", function (e) {
 export const viewProjects = function (projectManager) {
   projectsUL.innerHTML = "";
   projectManager.projects.forEach((project) => {
+    // do not show "Inbox" default project in projects list
+    if (project.name === "Inbox") return;
     projectsUL.insertAdjacentHTML(
       "beforeend",
       `
     <li
       data-id="${project.id}"
-      class="hover:cursor-pointer hover:border-l px-4 py-1 my-1 ${
+      class="cursor-pointer hover:border-l px-4 py-1 my-1 ${
         project.isCurrent
           ? "border-l border-rose-600 font-bold text-rose-600"
           : ""
@@ -106,4 +113,14 @@ projectsUL.addEventListener("click", function (e) {
   projectManager.setCurrentProject(e.target.dataset.id);
   viewProjects(projectManager);
   viewTasks();
+
+  // remove style from default pages (Inbox, Today, Upcoming)
+  document
+    .getElementById("inbox")
+    .classList.remove(
+      "border-l",
+      "border-rose-600",
+      "font-bold",
+      "text-rose-600"
+    );
 });
